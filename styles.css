@@ -1409,18 +1409,16 @@ html[lang="ja"].budoux-ready body {
   .page-access { background-size: 480px 480px; }
 }
 
-/* A soft caramel gradient warms the footer without overpowering the restaurant photos. */
+/* Rich terracotta echoes the orange restaurant accents and holds white text clearly. */
 .site-footer {
-  background:
-    radial-gradient(circle at 12% -18%, #fff7e5b8 0%, transparent 46%),
-    linear-gradient(118deg, #e2c9aa 0%, #d5ae88 48%, #c98b65 100%);
-  color: #3b281e;
+  background: linear-gradient(118deg, #b65130 0%, #a3472d 50%, #87382b 100%);
+  color: #fff9f3;
 }
 .site-footer::before {
   display: block;
-  background: linear-gradient(90deg, #edb35d, #e4773e 55%, #b95937);
+  background: linear-gradient(90deg, #f1b961, #ec8748 55%, #c45c36);
 }
-.site-footer .footer-bottom { border-top-color: #69433255; }
+.site-footer .footer-bottom { border-top-color: #ffe7d366; }
 .site-footer .footer-identity > a,
 .site-footer .footer-identity p,
 .site-footer .footer-contact h2,
@@ -1431,5 +1429,5 @@ html[lang="ja"].budoux-ready body {
 .site-footer .footer-nav a,
 .site-footer .footer-nav-title,
 .site-footer .footer-bottom,
-.site-footer .footer-bottom a { color: #3b281e; }
-.site-footer a:hover { color: #5c3222; }
+.site-footer .footer-bottom a { color: #fff9f3; }
+.site-footer a:hover { color: #ffe2a7; }
