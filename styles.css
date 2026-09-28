@@ -1435,7 +1435,7 @@ html[lang="ja"].budoux-ready body {
 .page-access .access-store,
 .page-access .godawari-store {
   grid-template-areas:
-    "heading ."
+    "heading heading"
     "gallery details";
   row-gap: 20px;
 }
@@ -1477,12 +1477,9 @@ html[lang="ja"].budoux-ready body {
 }
 .page-reservation .shop-deck .deck-photo-label { left: 18px; bottom: 18px; }
 
-/* Two labeled contact lines make the shop-to-phone relationship unmistakable. */
-.page-about .company-mini .company-contact-list { flex-direction: column; align-items: stretch; gap: 0; }
-.company-contact-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 12px; width: 100%; }
-.company-contact-row + .company-contact-row { margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee8df; }
-.company-contact-row > span { color: #9d4b34; font-weight: 700; }
-.company-contact-row > a { white-space: nowrap; font-weight: 700; }
+/* Each company row keeps its phone number directly under the linked shop name. */
+.page-about .company-mini .company-shop-entry { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; }
+.page-about .company-mini .company-shop-phone { color: #95472e; font-weight: 700; white-space: nowrap; }
 
 /* Both language labels share one capsule, with a restrained response when switched. */
 .site-header > .lang-toggle {
@@ -1512,6 +1509,9 @@ html[lang="ja"].budoux-ready body {
   .page-access .access-store .access-info { text-align: left; }
 }
 @media (max-width: 800px) {
+  .site-header > .brand { min-width: 0; max-width: none; overflow: hidden; text-overflow: ellipsis; }
+  .site-header > .lang-toggle { position: static; order: 1; flex: 0 0 68px; margin-left: auto; }
+  .site-header > .menu-toggle { order: 2; flex: 0 0 42px; margin-left: 12px; }
   .site-header.menu-open,
   .page-about .site-header.menu-open { background: #fff; color: var(--ink); box-shadow: 0 7px 20px #23170f1c; }
   .site-header.menu-open::before { opacity: 1; background: #fff; }
@@ -1530,7 +1530,17 @@ html[lang="ja"].budoux-ready body {
   .page-about .site-header.menu-open .menu-toggle span { background: var(--ink); }
 }
 @media (max-width: 600px) {
-  .company-contact-row { grid-template-columns: 1fr; gap: 2px; text-align: center; }
+  .site-header > .brand { font-size: clamp(13px, 3.6vw, 16px); letter-spacing: .02em; }
+  .page-about .company-mini .company-shop-entry { align-items: center; }
+  .page-reservation .deck-booking-group .booking-method {
+    min-height: 0;
+    aspect-ratio: 1;
+    gap: 3px;
+    padding: 8px 5px;
+  }
+  .page-reservation .deck-booking-group .booking-method img { height: 25px; }
+  .page-reservation .deck-booking-group .booking-method strong { font-size: 10px; line-height: 1.3; }
+  .page-reservation .deck-booking-group .booking-method small { font-size: 9px; line-height: 1.25; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header > .lang-toggle.is-switching { animation: none; }

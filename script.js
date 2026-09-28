@@ -75,7 +75,6 @@ const english = {
   "companyFieldRepresentative": "Representative",
   "companyFieldHino": "Shop 1",
   "companyFieldHachioji": "Shop 2",
-  "companyFieldContact": "Contact",
   "companyBusinessFull": "Operation of Indian Naan House Asakusabashi and Asian Restaurant & Bar Godawari Shin-Koenji",
   "hoursLabel": "Hours",
   "holidayLabel": "Regular holiday",
@@ -87,10 +86,10 @@ const english = {
   "reserveMethodsHeading": "Reserve a table",
   "deliveryHeading": "Delivery",
   "bookTabelog": "View on Tabelog",
-  "bookGurunavi": "Reserve on Rakuten Gurunavi",
+  "bookGurunavi": "View on Rakuten Gurunavi",
   "bookPhone": "Reserve by phone",
   "viewShopPage": "VIEW SHOP PAGE",
-  "viewReservationPage": "VIEW RESERVATION PAGE",
+  "viewReservationPage": "VIEW PAGE",
   "bookPhoneNumberHino": "03-3861-8030",
   "bookPhoneNumberHachioji": "03-5913-9199"
 };
