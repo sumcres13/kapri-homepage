@@ -6,4 +6,4 @@ The About section places the company overview below its heading, then pairs the 
 
 The Japanese/English switch changes the page language. SNS links for LINE and both Instagram accounts sit above the footer. Both Instagram buttons use the supplied logo image. Images are in `assets/`; the local BudouX parser is in `vendor/`. No build step or external JavaScript dependency is required.
 
-The restaurant information, photos, contact details, and external links were provided by the owner. The company registered address was not supplied, so no registered address is shown.
+The footer uses a solid orange-brown color with white text. The restaurant information, photos, contact details, and external links were provided by the owner. The company registered address was not supplied, so no registered address is shown.

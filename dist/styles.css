@@ -1411,7 +1411,7 @@ html[lang="ja"].budoux-ready body {
 
 /* Keep the footer simple and warm, using the site's terracotta orange with white type. */
 .site-footer {
-  background: #bd4828;
+  background: #a65332;
   color: #fff;
 }
 .site-footer::before { display: none; }
