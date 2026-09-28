@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" fill="none" aria-hidden="true">
+  <!-- Original repeating line art: spice flowers, leaves, and dining-room arches. -->
+  <defs>
+    <path id="petal" d="M0-39C21-64 24-91 0-113C-24-91-21-64 0-39Z"/>
+    <path id="leaf" d="M0 0C23-25 46-23 61-4C38 15 17 13 0 0Z"/>
+  </defs>
+  <g stroke="#BA5635" stroke-width="1.6" opacity=".28">
+    <g transform="translate(116 126)">
+      <circle r="29"/>
+      <circle r="17"/>
+      <circle r="128" stroke-dasharray="2 13" stroke-linecap="round"/>
+      <use href="#petal"/>
+      <use href="#petal" transform="rotate(45)"/>
+      <use href="#petal" transform="rotate(90)"/>
+      <use href="#petal" transform="rotate(135)"/>
+      <use href="#petal" transform="rotate(180)"/>
+      <use href="#petal" transform="rotate(225)"/>
+      <use href="#petal" transform="rotate(270)"/>
+      <use href="#petal" transform="rotate(315)"/>
+      <path d="M-150 0H-133M133 0H150M0-150V-133M0 133V150"/>
+    </g>
+    <path d="M488 568V405C488 327 549 266 627 266S766 327 766 405V568"/>
+    <path d="M515 568V405C515 342 564 293 627 293S739 342 739 405V568"/>
+    <path d="M541 568V405C541 356 578 319 627 319S713 356 713 405V568"/>
+    <path d="M466 568H720M466 590H720M466 612H720"/>
+    <path d="M-32 651C64 641 90 562 182 562C237 562 265 611 336 596"/>
+    <g transform="translate(58 627) rotate(-30)"><use href="#leaf"/></g>
+    <g transform="translate(115 582) rotate(24)"><use href="#leaf"/></g>
+    <g transform="translate(201 571) rotate(-20)"><use href="#leaf"/></g>
+    <g transform="translate(268 602) rotate(26)"><use href="#leaf"/></g>
+    <path d="M328 91l24-24 24 24-24 24-24-24ZM372 148l12-12 12 12-12 12-12-12ZM398 60l8-8 8 8-8 8-8-8Z"/>
+  </g>
+  <g fill="#BA5635" opacity=".21">
+    <circle cx="306" cy="253" r="3"/><circle cx="335" cy="278" r="2"/>
+    <circle cx="366" cy="240" r="4"/><circle cx="408" cy="285" r="2"/>
+    <circle cx="433" cy="220" r="3"/><circle cx="348" cy="345" r="2"/>
+    <circle cx="94" cy="387" r="3"/><circle cx="142" cy="423" r="2"/>
+    <circle cx="58" cy="465" r="2"/><circle cx="210" cy="452" r="3"/>
+  </g>
+</svg>
