@@ -1545,3 +1545,9 @@ html[lang="ja"].budoux-ready body {
 @media (prefers-reduced-motion: reduce) {
   .site-header > .lang-toggle.is-switching { animation: none; }
 }
+
+/* Prevent mobile browser chrome from resizing or recompositing the hero mid-scroll. */
+@media (max-width: 800px) {
+  .hero { height: var(--mobile-hero-height, 100svh); }
+  .hero-photo { animation: none; transform: none; will-change: auto; }
+}

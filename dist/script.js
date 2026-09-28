@@ -203,11 +203,25 @@ languageButton?.addEventListener('click', () => {
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.site-nav');
 const siteHeader = document.querySelector('.site-header');
-if (siteHeader) {
-  const updateHeader = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
+// Keep the mobile hero at its initial visible height while browser chrome moves.
+// Recalculate only when the layout width changes (for example, rotation).
+const mobileHero = document.querySelector('.hero');
+const mobileHeroQuery = window.matchMedia('(max-width: 800px)');
+let heroViewportWidth = null;
+function setMobileHeroHeight() {
+  if (!mobileHero) return;
+  if (!mobileHeroQuery.matches) {
+    mobileHero.style.removeProperty('--mobile-hero-height');
+    heroViewportWidth = null;
+    return;
+  }
+  const width = document.documentElement.clientWidth;
+  if (width === heroViewportWidth) return;
+  heroViewportWidth = width;
+  mobileHero.style.setProperty('--mobile-hero-height', `${window.innerHeight}px`);
 }
+setMobileHeroHeight();
+window.addEventListener('resize', setMobileHeroHeight, { passive: true });
 if (menuButton && nav) {
   const closeMenu = () => {
     menuButton.setAttribute('aria-expanded', 'false');
@@ -229,20 +243,36 @@ if (menuButton && nav) {
 
 const sectionLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
 const sectionIds = ['home', 'about', 'access', 'reservation'];
+const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+let currentSection = null;
 function updateActiveSection() {
   let activeSection = 'home';
-  for (const id of sectionIds) {
-    const section = document.getElementById(id);
-    if (section && section.getBoundingClientRect().top <= window.innerHeight * 0.35) activeSection = id;
+  const threshold = window.innerHeight * 0.35;
+  for (const section of sections) {
+    if (section.getBoundingClientRect().top <= threshold) activeSection = section.id;
   }
+  if (activeSection === currentSection) return;
+  currentSection = activeSection;
   sectionLinks.forEach((link) => {
     if (link.getAttribute('href') === `#${activeSection}`) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');
   });
 }
-window.addEventListener('scroll', updateActiveSection, { passive: true });
-window.addEventListener('hashchange', updateActiveSection);
-updateActiveSection();
+let scrollUpdatePending = false;
+function updateScrollState() {
+  scrollUpdatePending = false;
+  siteHeader?.classList.toggle('is-scrolled', window.scrollY > 24);
+  updateActiveSection();
+}
+function scheduleScrollUpdate() {
+  if (scrollUpdatePending) return;
+  scrollUpdatePending = true;
+  requestAnimationFrame(updateScrollState);
+}
+window.addEventListener('scroll', scheduleScrollUpdate, { passive: true });
+window.addEventListener('hashchange', scheduleScrollUpdate);
+window.addEventListener('resize', scheduleScrollUpdate, { passive: true });
+updateScrollState();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 document.querySelectorAll('[data-shop-slideshow]').forEach((gallery) => {
