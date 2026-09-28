@@ -798,7 +798,6 @@ html[lang="ja"].budoux-ready body {
 .page-access .access-store .access-actions { margin-top: 20px; }
 .page-access .access-store .access-actions a { padding: 10px 14px; background: #8d412e; }
 .page-access .access-store .access-actions a:nth-child(2) { background: #d95630; }
-.page-access .access-store .access-actions a:nth-child(3) { background: #fff; color: #8d412e; border: 1px solid #ca9f82; }
 
 /* Reservation choices are visible together, with the same practical links for each shop. */
 .page-reservation .reservation-intro { padding-top: 72px; padding-bottom: 30px; }
@@ -1431,3 +1430,108 @@ html[lang="ja"].budoux-ready body {
 .site-footer .footer-bottom,
 .site-footer .footer-bottom a { color: #fff9f3; }
 .site-footer a:hover { color: #ffe2a7; }
+
+/* Shop identity stays above the left gallery; the story and practical details fill the right column. */
+.page-access .access-store,
+.page-access .godawari-store {
+  grid-template-areas:
+    "heading ."
+    "gallery details";
+  row-gap: 20px;
+}
+.page-access .access-store .access-heading { grid-area: heading; min-width: 0; text-align: center; }
+.page-access .access-store .access-photo,
+.page-access .access-store .godawari-shop-gallery { grid-area: gallery; order: 0; }
+.page-access .access-store .access-info { grid-area: details; order: 0; }
+.page-access .access-store .access-heading .access-shop-logo { margin: 0 auto 9px; }
+.page-access .access-store .access-heading h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.page-access .access-store .access-heading h2::after {
+  content: "";
+  display: block;
+  width: 35px;
+  height: 2px;
+  margin: 13px auto 0;
+  border-radius: 2px;
+  background: #df6237;
+  opacity: .8;
+}
+.page-access .access-store .access-story-copy { margin-top: 0; }
+
+/* The storefront images nearly match this ratio, so they fill the frame with only a slight crop. */
+.page-reservation .shop-deck .deck-photo { height: auto; aspect-ratio: 1.32; background: #302721; }
+.page-reservation .shop-deck .deck-photo::before { content: none; }
+.page-reservation .shop-deck .deck-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 46%;
+  filter: none;
+}
+.page-reservation .shop-deck .deck-photo-label { left: 18px; bottom: 18px; }
+
+/* Two labeled contact lines make the shop-to-phone relationship unmistakable. */
+.page-about .company-mini .company-contact-list { flex-direction: column; align-items: stretch; gap: 0; }
+.company-contact-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 12px; width: 100%; }
+.company-contact-row + .company-contact-row { margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee8df; }
+.company-contact-row > span { color: #9d4b34; font-weight: 700; }
+.company-contact-row > a { white-space: nowrap; font-weight: 700; }
+
+/* Both language labels share one capsule, with a restrained response when switched. */
+.site-header > .lang-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  min-width: 68px;
+  height: 36px;
+  padding: 0;
+  border-radius: 18px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.site-header > .lang-toggle:active { transform: scale(.96); }
+.site-header > .lang-toggle.is-switching { animation: language-switch .28s ease; }
+@keyframes language-switch {
+  0% { transform: scale(.94); opacity: .72; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .page-access .access-store,
+  .page-access .godawari-store { grid-template-areas: "heading" "gallery" "details"; }
+  .page-access .access-store .access-info { text-align: left; }
+}
+@media (max-width: 800px) {
+  .site-header.menu-open,
+  .page-about .site-header.menu-open { background: #fff; color: var(--ink); box-shadow: 0 7px 20px #23170f1c; }
+  .site-header.menu-open::before { opacity: 1; background: #fff; }
+  .site-header.menu-open .brand,
+  .page-about .site-header.menu-open .brand { color: var(--ink); text-shadow: none; }
+  .site-header.menu-open .site-nav,
+  .page-about .site-header.menu-open .site-nav { background: #fff; color: var(--ink); box-shadow: 0 14px 20px #23170f1c; }
+  .site-header.menu-open .site-nav > a,
+  .page-about .site-header.menu-open .site-nav > a { color: var(--ink); text-shadow: none; border-color: #e8e2da; }
+  .site-header.menu-open .site-nav > a[aria-current="location"] { color: #b64d31; }
+  .site-header.menu-open .lang-toggle,
+  .page-about .site-header.menu-open .lang-toggle { border-color: var(--ink); background: transparent; color: var(--ink); }
+  .site-header.menu-open .menu-toggle,
+  .page-about .site-header.menu-open .menu-toggle { border-color: var(--ink); background: transparent; }
+  .site-header.menu-open .menu-toggle span,
+  .page-about .site-header.menu-open .menu-toggle span { background: var(--ink); }
+}
+@media (max-width: 600px) {
+  .company-contact-row { grid-template-columns: 1fr; gap: 2px; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header > .lang-toggle.is-switching { animation: none; }
+}

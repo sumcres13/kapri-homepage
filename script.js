@@ -9,6 +9,8 @@ const english = {
   "footerContact": "CONTACT",
   "storeHinoShort": "Asakusabashi",
   "storeHachiojiShort": "Shin-Koenji",
+  "companyShopHinoFull": "Indian Naan House Asakusabashi",
+  "companyShopHachiojiFull": "Asian Restaurant & Bar Godawari Shin-Koenji",
   "pageTop": "BACK TO TOP ↑",
   "homeHeroTitle": "Connecting people<br><em>and cultures through food.</em>",
   "homeHeroLead": "Diverse Asian flavors and warm, welcoming moments.<br>Visit our restaurants in Asakusabashi and Shin-Koenji.",
@@ -158,13 +160,17 @@ function applyLanguage(nextLanguage) {
   if (languageButton) {
     languageButton.textContent = language === 'en' ? '日本語' : 'EN';
     languageButton.setAttribute('aria-label', language === 'en' ? '日本語に切り替える' : 'Switch to English');
+    languageButton.dataset.language = language;
   }
   imageAlts.forEach(({ image, ja }) => {
     const filename = image.getAttribute('src')?.split('/').pop();
     image.alt = language === 'en' ? (altEnglish[filename] ?? ja) : ja;
   });
   const menuButton = document.querySelector('.menu-toggle');
-  if (menuButton) menuButton.setAttribute('aria-label', language === 'en' ? 'Open menu' : 'メニューを開く');
+  if (menuButton) {
+    const open = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-label', language === 'en' ? (open ? 'Close menu' : 'Open menu') : (open ? 'メニューを閉じる' : 'メニューを開く'));
+  }
   document.querySelector('.site-nav')?.setAttribute('aria-label', language === 'en' ? 'Main navigation' : 'メインナビゲーション');
   document.querySelector('.footer-nav')?.setAttribute('aria-label', language === 'en' ? 'Footer navigation' : 'フッターナビゲーション');
   document.querySelector('.reservation-deck')?.setAttribute('aria-label', language === 'en' ? 'Reservations and delivery by shop' : '店舗別のご予約とデリバリー');
@@ -185,6 +191,9 @@ applyLanguage(language);
 languageButton?.addEventListener('click', () => {
   const next = language === 'ja' ? 'en' : 'ja';
   try { localStorage.setItem('kapri-language', next); } catch { /* Keep the switch active in this page. */ }
+  languageButton.classList.remove('is-switching');
+  void languageButton.offsetWidth;
+  languageButton.classList.add('is-switching');
   applyLanguage(next);
   const url = new URL(location.href);
   if (next === 'en') url.searchParams.set('lang', 'en');
@@ -201,16 +210,21 @@ if (siteHeader) {
   updateHeader();
 }
 if (menuButton && nav) {
+  const closeMenu = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', language === 'en' ? 'Open menu' : 'メニューを開く');
+    nav.classList.remove('is-open');
+    siteHeader?.classList.remove('menu-open');
+  };
   menuButton.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!open));
     menuButton.setAttribute('aria-label', language === 'en' ? (open ? 'Open menu' : 'Close menu') : (open ? 'メニューを開く' : 'メニューを閉じる'));
     nav.classList.toggle('is-open', !open);
+    siteHeader?.classList.toggle('menu-open', !open);
   });
-  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    nav.classList.remove('is-open');
-  }));
+  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
 }
 
 
